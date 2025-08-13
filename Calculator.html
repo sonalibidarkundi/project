@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gradient Glass Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 320px;
+    }
+
+    .display {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 20px;
+      color: #333;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 50%;
+      padding: 20px;
+      font-size: 18px;
+      background: linear-gradient(145deg, #ffffff, #d1d1d1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    .equal {
+      background: linear-gradient(145deg, #4CAF50, #45a049);
+      color: white;
+    }
+
+    .clear {
+      background: linear-gradient(145deg, #f44336, #e53935);
+      color: white;
+    }
+
+    @media (max-width: 400px) {
+      .calculator {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button onclick="clearDisplay()" class="clear">C</button>
+      <button onclick="append('/')">÷</button>
+      <button onclick="append('*')">×</button>
+      <button onclick="append('-')">−</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('+')">+</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="calculate()" class="equal">=</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('.')">.</button>
+
+      <button onclick="append('0')" style="grid-column: span 2;">0</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById("display");
+
+    function append(value) {
+      if (display.textContent === "0") {
+        display.textContent = value;
+      } else {
+        display.textContent += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.textContent = "0";
+    }
+
+    function calculate() {
+      try {
+        display.textContent = eval(display.textContent);
+      } catch {
+        display.textContent = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
